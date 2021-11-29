@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VendasWebMVC.Models;
 
-namespace VendasWebMVC.Data
+namespace VendasWebMVC.Models
 {
     public class VendasWebMVCContext : DbContext
     {
@@ -14,6 +14,8 @@ namespace VendasWebMVC.Data
         {
         }
 
-        public DbSet<VendasWebMVC.Models.Departamento> Departamento { get; set; }
+        public DbSet<Departamento> Departamento { get; set; }
+        public DbSet<Vendedor>Vendedor { get; set; }
+        public DbSet<VendaRegistrada> VendaRegistrada { get; set; }
     }
 }
