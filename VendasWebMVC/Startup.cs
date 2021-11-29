@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using VendasWebMVC.Models;
 using VendasWebMVC.Data;
+using VendasWebMVC.Services;
 
 namespace VendasWebMVC
 {
@@ -37,6 +38,7 @@ namespace VendasWebMVC
                     builder.MigrationsAssembly("VendasWebMVC")));
 
             services.AddScoped<SeedingService>();
+            services.AddScoped<VendedorService>();
         }
 
 
