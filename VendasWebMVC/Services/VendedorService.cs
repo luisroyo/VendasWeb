@@ -19,9 +19,21 @@ namespace VendasWebMVC.Services
         }
         public void Inserir(Vendedor obj)
         {
-            obj.Departamento = _contex.Departamento.First();
             _contex.Add(obj);
             _contex.SaveChanges();
         }
+        public Vendedor BuscarId(int id)
+        {
+            return _contex.Vendedor.FirstOrDefault(obj => obj.ID == id);
+        }
+
+        public void Remover(int id)
+        {
+            var obj = _contex.Vendedor.Find(id);
+            _contex.Vendedor.Remove(obj);
+            _contex.SaveChanges();
+        }
+
+        
     }
 }
