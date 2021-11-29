@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VendasWebMVC.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace VendasWebMVC.Services
 {
@@ -24,7 +25,7 @@ namespace VendasWebMVC.Services
         }
         public Vendedor BuscarId(int id)
         {
-            return _contex.Vendedor.FirstOrDefault(obj => obj.ID == id);
+            return _contex.Vendedor.Include(obj=> obj.Departamento).FirstOrDefault(obj => obj.ID == id);
         }
 
         public void Remover(int id)
@@ -32,8 +33,6 @@ namespace VendasWebMVC.Services
             var obj = _contex.Vendedor.Find(id);
             _contex.Vendedor.Remove(obj);
             _contex.SaveChanges();
-        }
-
-        
+        }        
     }
 }
