@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using VendasWebMVC.Models;
 using VendasWebMVC.Models.ViewsModels;
 using VendasWebMVC.Services;
@@ -41,13 +43,13 @@ namespace VendasWebMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido!" });
             }
             var obj = _vendedoresService.BuscarId(id.Value);
 
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
             return View(obj);
         }
@@ -63,13 +65,13 @@ namespace VendasWebMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
             var obj = _vendedoresService.BuscarId(id.Value);
 
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
             return View(obj);
 
@@ -78,12 +80,12 @@ namespace VendasWebMVC.Controllers
         {
             if(id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido!" });
             }
             var obj = _vendedoresService.BuscarId(id.Value);
             if (obj == null )
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
             List<Departamento> departamentos = _departamentoService.FindAll();
             VendedorFormViewModel viewModel = new VendedorFormViewModel { Vendedor = obj, Departamentos = departamentos };
@@ -95,21 +97,27 @@ namespace VendasWebMVC.Controllers
         {
             if (id != vendedor.ID)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Id não correspondem!" });
             }
             try
             {
                 _vendedoresService.Update(vendedor);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException)
+            catch (ApplicationException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException)
+            
+        }
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
             {
-                return BadRequest();
-            }
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }
