@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-﻿@model VendasWebMVC.Models.ViewsModels.VendedorFormViewModel
-=======
-﻿@model VendasWebMVC.Models.Vendedor
+@model VendasWebMVC.Models.ViewsModels.VendedorFormViewModel
 @{
->>>>>>> aac1a996cf27aaff57e41c16a07fc619bc675f3e
     ViewData["Title"] = "Criar";
 }
 
@@ -12,7 +8,6 @@
 <h4>Vendedor</h4>
 <hr />
 
-<<<<<<< HEAD
 <div class="col-md-4">
     <form asp-action="Criar">
 
@@ -35,39 +30,12 @@
         </div>
         <div class="form-group">
             <label asp-for="Vendedor.DepartamentoId" class="control-label"></label>
-            <select asp-for="Vendedor.DepartamentoId" asp-items="@(new SelectList(Model.Departamentos,"Id","Nome"))" class="form-control"></select>
+            <select asp-for="Vendedor.DepartamentoId" asp-items="@(new SelectList(Model.Departamentos,"Id",
+"Nome"))" class="form-control"></select>
         </div>
         <div class="form-group">
             <input type="submit" value="Criar" class="btn btn-default" />
         </div>
     </form>
 </div>
-=======
-    <div class ="col-md-4">
-        <form asp-action="Criar">
-
-            <div class="form-group">
-                <label asp-for="Name" class ="control-label"></label>
-                <input asp-for="Name" class="form-control"/>
-            </div>
-           
-            <div class="form-group">
-                <label asp-for="Email" class ="control-label"></label>
-                <input asp-for="Email" class="form-control"/>
-            </div>
-             <div class="form-group">
-                <label asp-for="Nascimento" class ="control-label"></label>
-                <input asp-for="Nascimento" class="form-control"/>
-            </div>
-             <div class="form-group">
-                <label asp-for="SalarioBase" class ="control-label"></label>
-                <input asp-for="SalarioBase" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
->>>>>>> aac1a996cf27aaff57e41c16a07fc619bc675f3e
 </>
-

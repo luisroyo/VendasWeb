@@ -39,10 +39,7 @@ namespace VendasWebMVC
 
             services.AddScoped<SeedingService>();
             services.AddScoped<VendedorService>();
-<<<<<<< HEAD
             services.AddScoped<DepartamentoService>();
-=======
->>>>>>> aac1a996cf27aaff57e41c16a07fc619bc675f3e
         }
 
 
