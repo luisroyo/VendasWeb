@@ -22,7 +22,7 @@ namespace VendasWebMVC.Controllers
         }
 
         // GET: Departamentos/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Detalhes(int? id)
         {
             if (id == null)
             {
@@ -40,7 +40,7 @@ namespace VendasWebMVC.Controllers
         }
 
         // GET: Departamentos/Create
-        public IActionResult Create()
+        public IActionResult Criar()
         {
             return View();
         }
@@ -50,7 +50,7 @@ namespace VendasWebMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome")] Departamento departamento)
+        public async Task<IActionResult> Criar([Bind("Id,Nome")] Departamento departamento)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +62,7 @@ namespace VendasWebMVC.Controllers
         }
 
         // GET: Departamentos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Editar(int? id)
         {
             if (id == null)
             {
@@ -82,7 +82,7 @@ namespace VendasWebMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Departamento departamento)
+        public async Task<IActionResult> Editar(int id, [Bind("Id,Nome")] Departamento departamento)
         {
             if (id != departamento.Id)
             {
@@ -113,7 +113,7 @@ namespace VendasWebMVC.Controllers
         }
 
         // GET: Departamentos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Deletar(int? id)
         {
             if (id == null)
             {
@@ -131,7 +131,7 @@ namespace VendasWebMVC.Controllers
         }
 
         // POST: Departamentos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Deletar")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
