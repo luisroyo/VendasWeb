@@ -3,6 +3,7 @@ using System.Linq;
 using VendasWebMVC.Models;
 using Microsoft.EntityFrameworkCore;
 using VendasWebMVC.Services.Exceptions;
+using System.Threading.Tasks;
 
 namespace VendasWebMVC.Services
 {
@@ -15,36 +16,37 @@ namespace VendasWebMVC.Services
             _context = context;
         }
 
-        public List<Vendedor> BuscarTodos()
+        public async Task<List<Vendedor>> BuscarTodosAsync()
         {
-            return _context.Vendedor.ToList();
+            return await _context.Vendedor.ToListAsync();
         }
-        public void Inserir(Vendedor obj)
+        public async Task InserirAsync(Vendedor obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public Vendedor BuscarId(int id)
+        public async Task<Vendedor> BuscarIdAsync(int id)
         {
-            return _context.Vendedor.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.ID == id);
+            return await _context.Vendedor.Include(obj => obj.Departamento).FirstOrDefaultAsync(obj => obj.ID == id);
         }
 
-        public void Remover(int id)
+        public async Task RemoverAsync(int id)
         {
-            var obj = _context.Vendedor.Find(id);
+            var obj = await _context.Vendedor.FindAsync(id);
             _context.Vendedor.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void Update(Vendedor obj)
+        public async Task UpdateAsync(Vendedor obj)
         {
-            if(!_context.Vendedor.Any(x=> x.ID == obj.ID))
+            bool hasAny = await _context.Vendedor.AnyAsync(x => x.ID == obj.ID);
+            if (!hasAny)
             {
                 throw new NotFoundException("Id Não Encontrado!");
             }
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
             catch (DbConcurrencyException e)
             {
