@@ -1,6 +1,11 @@
-﻿namespace VendasWebMVC.Services.Exceptions
+﻿using System;
+namespace VendasWebMVC.Services.Exceptions
 {
-    public class DbConcurrencyException
+    public class DbConcurrencyException : ApplicationException
     {
+        public DbConcurrencyException(string message) : base(message)
+        {
+
+        }
     }
 }
