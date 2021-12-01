@@ -7,32 +7,32 @@ namespace VendasWebMVC.Services
 {
     public class VendedorService
     {
-        private readonly VendasWebMVCContext _contex;
+        private readonly VendasWebMVCContext _context;
 
         public VendedorService(VendasWebMVCContext context)
         {
-            _contex = context;
+            _context = context;
         }
 
         public List<Vendedor> BuscarTodos()
         {
-            return _contex.Vendedor.ToList();
+            return _context.Vendedor.ToList();
         }
         public void Inserir(Vendedor obj)
         {
-            _contex.Add(obj);
-            _contex.SaveChanges();
+            _context.Add(obj);
+            _context.SaveChanges();
         }
         public Vendedor BuscarId(int id)
         {
-            return _contex.Vendedor.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.ID == id);
+            return _context.Vendedor.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.ID == id);
         }
 
         public void Remover(int id)
         {
-            var obj = _contex.Vendedor.Find(id);
-            _contex.Vendedor.Remove(obj);
-            _contex.SaveChanges();
+            var obj = _context.Vendedor.Find(id);
+            _context.Vendedor.Remove(obj);
+            _context.SaveChanges();
         }
     }
 }
